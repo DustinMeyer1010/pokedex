@@ -6,7 +6,7 @@ import (
 	"github.com/DustinMeyer1010/pokedexcli/internal/models"
 )
 
-var pokedex map[string]models.Pokemon
+var pokedex map[string]models.Pokemon = make(map[string]models.Pokemon)
 
 func AddPokemon(pokemon models.Pokemon) error {
 	pokedex[pokemon.Name] = pokemon
@@ -22,4 +22,12 @@ func RetrievePokemon(pokemonName string) (*models.Pokemon, error) {
 	}
 
 	return &p, nil
+}
+
+func RetrieveAllPokemon() (all []string) {
+	for key, _ := range pokedex {
+		all = append(all, key)
+	}
+
+	return
 }
