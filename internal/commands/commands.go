@@ -40,5 +40,10 @@ func InitCommands() {
 		Description: "Explore a location (Usage: explore {location})",
 		Callback:    commandExplore,
 	}
+	Commands["catch"] = CliCommand{
+		Name:        "catch",
+		Description: "Catch a pokemon (Usage: catch {pokemon})",
+		Callback:    commandCatch,
+	}
 
 }

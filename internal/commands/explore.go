@@ -1,8 +1,12 @@
 package commands
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
+
+	"github.com/DustinMeyer1010/pokedexcli/internal/models"
 )
 
 func commandExplore(config *Config) error {
@@ -17,7 +21,19 @@ func commandExplore(config *Config) error {
 		return fmt.Errorf("location not found")
 	}
 
-	fmt.Printf("Exploring %s\n", config.Arugments)
+	body, _ := io.ReadAll(res.Body)
+
+	var exploredLocation models.LocationExplore
+
+	json.Unmarshal(body, &exploredLocation)
+
+	fmt.Printf("Exploring %s...\n", config.Arugments)
+
+	fmt.Println("Found Pokemon: ")
+
+	for _, pokemon := range exploredLocation.PokemonEncounters {
+		fmt.Printf("- %s\n", pokemon.Pokemon.Name)
+	}
 
 	return nil
 
