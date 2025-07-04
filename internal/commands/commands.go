@@ -55,5 +55,4 @@ func InitCommands() {
 		Description: "Show all pokemon in pokedex",
 		Callback:    commandPokedex,
 	}
-
 }
