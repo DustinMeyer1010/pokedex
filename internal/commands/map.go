@@ -24,7 +24,7 @@ type location struct {
 
 var Cache cache.Cache = *cache.NewCache(time.Second * 60)
 
-func commandMap(config *Config) error {
+func CommandMap(config *Config) error {
 	var body []byte
 	var exist bool
 

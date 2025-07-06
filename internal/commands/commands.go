@@ -28,7 +28,7 @@ func InitCommands() {
 	Commands["map"] = CliCommand{
 		Name:        "map",
 		Description: "Shows Next 20 locations",
-		Callback:    commandMap,
+		Callback:    CommandMap,
 	}
 	Commands["mapb"] = CliCommand{
 		Name:        "mapb",

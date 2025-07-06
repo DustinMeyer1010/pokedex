@@ -1,16 +1,16 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"os"
 
 	"github.com/DustinMeyer1010/pokedexcli/internal/commands"
-	"github.com/DustinMeyer1010/pokedexcli/internal/utils"
+	tea "github.com/charmbracelet/bubbletea"
 )
 
 var cfg commands.Config = commands.Config{Next: "https://pokeapi.co/api/v2/location-area/?offset=0&limit=20", Previous: ""}
 
+/*
 func main() {
 	commands.InitCommands()
 
@@ -38,5 +38,14 @@ func main() {
 			fmt.Printf("Unknown Command %s\n", command)
 		}
 
+	}
+}
+*/
+
+func main() {
+	p := tea.NewProgram(initialModel())
+	if err := p.Start(); err != nil {
+		fmt.Println("Error:", err)
+		os.Exit(1)
 	}
 }
