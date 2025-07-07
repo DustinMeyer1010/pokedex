@@ -25,16 +25,6 @@ func InitCommands() {
 		Description: "Exit the Pokedex",
 		Callback:    commandExit,
 	}
-	Commands["map"] = CliCommand{
-		Name:        "map",
-		Description: "Shows Next 20 locations",
-		Callback:    CommandMap,
-	}
-	Commands["mapb"] = CliCommand{
-		Name:        "mapb",
-		Description: "Shows Previous 20 locations",
-		Callback:    commandMapb,
-	}
 	Commands["explore"] = CliCommand{
 		Name:        "explore",
 		Description: "Explore a location (Usage: explore {location})",

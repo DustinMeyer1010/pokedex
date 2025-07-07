@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/DustinMeyer1010/pokedexcli/internal/commands"
+	"github.com/DustinMeyer1010/pokedexcli/internal/utils"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
@@ -43,7 +44,7 @@ func main() {
 */
 
 func main() {
-	p := tea.NewProgram(initialModel())
+	p := tea.NewProgram(utils.InitialModel())
 	if err := p.Start(); err != nil {
 		fmt.Println("Error:", err)
 		os.Exit(1)

@@ -8,6 +8,8 @@ import (
 	"time"
 
 	"github.com/DustinMeyer1010/pokedexcli/internal/cache"
+	"github.com/DustinMeyer1010/pokedexcli/internal/models"
+	"github.com/charmbracelet/bubbles/list"
 )
 
 type locationAreas struct {
@@ -24,7 +26,7 @@ type location struct {
 
 var Cache cache.Cache = *cache.NewCache(time.Second * 60)
 
-func CommandMap(config *Config) error {
+func CommandMap(config *Config) (locations []list.Item, err error) {
 	var body []byte
 	var exist bool
 
@@ -32,76 +34,71 @@ func CommandMap(config *Config) error {
 		res, err := http.Get(config.Next)
 
 		if err != nil {
-			return fmt.Errorf("fail to retrieve locations")
+			return nil, fmt.Errorf("fail to retrieve locations")
 		}
 		body, err = io.ReadAll(res.Body)
 		Cache.Add(config.Next, body)
 
 		if err != nil {
-			return fmt.Errorf("failed to read response body")
+			return nil, fmt.Errorf("failed to read response body")
 		}
 
 	}
 
 	var data locationAreas
-	err := json.Unmarshal(body, &data)
+	err = json.Unmarshal(body, &data)
 
 	if err != nil {
-		return fmt.Errorf("fail to parse locations")
+		return nil, fmt.Errorf("fail to parse locations")
 	}
 
 	config.Next = data.Next
 	config.Previous = data.Previous
 
-	for _, results := range data.Results {
-		fmt.Println(results.Name)
+	for _, loc := range data.Results {
+		locations = append(locations, models.Location{Name: loc.Name, Desc: ""})
 	}
 
-	if exist {
-		fmt.Println("pulling cached data")
-	}
-	return err
+	return locations, err
 }
 
-func commandMapb(config *Config) error {
+func CommandMapb(config *Config) (locations []list.Item, err error) {
 	var body []byte
 	var exist bool
 
 	if config.Previous == "" {
-		return fmt.Errorf("no previous locations")
+		return nil, fmt.Errorf("no previous locations")
 	}
 
 	if body, exist = Cache.Get(config.Previous); !exist {
 		res, err := http.Get(config.Previous)
 
 		if err != nil {
-			return fmt.Errorf("fail to retrieve locations")
+			return nil, fmt.Errorf("fail to retrieve locations")
 		}
 
 		body, err = io.ReadAll(res.Body)
 		Cache.Add(config.Previous, body)
 
 		if err != nil {
-			return fmt.Errorf("failed to read response body")
+			return nil, fmt.Errorf("failed to read response body")
 		}
 	}
 
 	var data locationAreas
-	err := json.Unmarshal(body, &data)
+	err = json.Unmarshal(body, &data)
 
 	if err != nil {
-		return fmt.Errorf("fail to parse locations")
+		return nil, fmt.Errorf("fail to parse locations")
 	}
 
 	config.Next = data.Next
 	config.Previous = data.Previous
 
-	for _, results := range data.Results {
-		fmt.Println(results.Name)
+	for _, loc := range data.Results {
+		locations = append(locations, models.Location{Name: loc.Name, Desc: ""})
 	}
 
-	if exist {
-		fmt.Println("pulling cached data")
-	}
-	return err
+	return locations, err
+
 }
