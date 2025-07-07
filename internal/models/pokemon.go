@@ -1,5 +1,15 @@
 package models
 
+type Pokemon struct {
+	Name string
+}
+
+func (p Pokemon) GetName() string { return p.Name }
+
+func (p Pokemon) Title() string       { return p.Name }
+func (p Pokemon) Description() string { return "tests" }
+func (p Pokemon) FilterValue() string { return p.Name }
+
 type PokemonAPI struct {
 	ID             int    `json:"id"`
 	Name           string `json:"name"`
@@ -283,13 +293,3 @@ type PokemonAPI struct {
 		} `json:"abilities"`
 	} `json:"past_abilities"`
 }
-
-type Pokemon struct {
-	Name string
-}
-
-func (p Pokemon) GetName() string { return p.Name }
-
-func (p Pokemon) Title() string       { return p.Name }
-func (p Pokemon) Description() string { return "tests" }
-func (p Pokemon) FilterValue() string { return p.Name }

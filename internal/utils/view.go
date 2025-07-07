@@ -17,8 +17,7 @@ func (m model) View() string {
 		body.WriteString("\n[n] Next - [p] Previous [up/down] - Change Selection")
 	case pokemonView:
 		m.pokemonMenu.Title = "Pokemon Found"
-		return m.pokemonMenu.View()
-		//body.WriteString(m.pokemonMenu.View())
+		body.WriteString(m.pokemonMenu.View())
 	default:
 		body.WriteString("Loading")
 	}
