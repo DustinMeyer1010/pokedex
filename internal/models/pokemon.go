@@ -1,6 +1,6 @@
 package models
 
-type Pokemon struct {
+type PokemonAPI struct {
 	ID             int    `json:"id"`
 	Name           string `json:"name"`
 	BaseExperience int    `json:"base_experience"`
@@ -283,3 +283,13 @@ type Pokemon struct {
 		} `json:"abilities"`
 	} `json:"past_abilities"`
 }
+
+type Pokemon struct {
+	Name string
+}
+
+func (p Pokemon) GetName() string { return p.Name }
+
+func (p Pokemon) Title() string       { return p.Name }
+func (p Pokemon) Description() string { return "tests" }
+func (p Pokemon) FilterValue() string { return p.Name }

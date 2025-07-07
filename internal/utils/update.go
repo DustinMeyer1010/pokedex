@@ -2,6 +2,7 @@ package utils
 
 import (
 	"github.com/DustinMeyer1010/pokedexcli/internal/commands"
+	"github.com/DustinMeyer1010/pokedexcli/internal/models"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
@@ -41,8 +42,24 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 			case "b":
 				m.currentView = mainView
-
+			case "enter":
+				location := m.mapMenu.SelectedItem().(models.Location)
+				config.Arugments = location.Name
+				pokemon, _ := commands.CommandExplore(&config)
+				m.pokemonMenu.SetItems(pokemon)
+				m.currentView = pokemonView
 			}
+		case pokemonView:
+			switch msg.String() {
+			case "ctrl-c", "q":
+				return m, tea.Quit
+			case "b":
+				m.currentView = mapView
+			case "enter":
+
+				return m, tea.Quit
+			}
+
 		}
 
 	}
@@ -53,6 +70,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	if m.currentView == mapView {
 		m.mapMenu, cmd = m.mapMenu.Update(msg)
+	}
+
+	if m.currentView == pokemonView {
+		m.pokemonMenu, cmd = m.pokemonMenu.Update(msg)
 	}
 
 	return m, cmd

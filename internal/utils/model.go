@@ -10,6 +10,7 @@ import (
 const (
 	mainView models.ViewState = iota
 	mapView
+	pokemonView
 	inputView
 )
 
@@ -17,6 +18,7 @@ type model struct {
 	currentView models.ViewState
 	commandMenu list.Model
 	mapMenu     list.Model
+	pokemonMenu list.Model
 }
 
 // Init implements tea.Model.
@@ -47,5 +49,6 @@ func InitialModel() model {
 		currentView: mainView,
 		commandMenu: l,
 		mapMenu:     l,
+		pokemonMenu: l,
 	}
 }
