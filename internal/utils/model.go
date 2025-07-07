@@ -13,21 +13,6 @@ const (
 	inputView
 )
 
-type command struct {
-	name        string
-	description string
-	callback    func(config *commands.Config) ([]list.Item, error)
-	view        models.ViewState
-}
-
-func (c command) GetName() string {
-	return c.name
-}
-
-func (c command) Title() string       { return c.name }
-func (c command) Description() string { return c.description }
-func (c command) FilterValue() string { return c.name }
-
 type model struct {
 	currentView models.ViewState
 	commandMenu list.Model
@@ -41,11 +26,11 @@ func (m model) Init() tea.Cmd {
 
 func InitialModel() model {
 	commands := []list.Item{
-		command{
-			name:        "map",
-			description: "Show the map locations",
-			callback:    commands.CommandMap,
-			view:        mapView,
+		commands.Command{
+			Name:     "map",
+			Desc:     "Show the map locations",
+			Callback: commands.CommandMap,
+			View:     mapView,
 		},
 	}
 

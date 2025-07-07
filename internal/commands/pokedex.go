@@ -1,5 +1,6 @@
 package commands
 
+/*
 import (
 	"fmt"
 
@@ -16,3 +17,4 @@ func commandPokedex(config *Config) error {
 
 	return nil
 }
+*/

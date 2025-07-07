@@ -1,5 +1,6 @@
 package commands
 
+/*
 import (
 	"fmt"
 
@@ -39,3 +40,4 @@ Weight: %d
 
 	return nil
 }
+*/

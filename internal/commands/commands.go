@@ -1,16 +1,38 @@
 package commands
 
-type CliCommand struct {
-	Name        string
-	Description string
-	Callback    func(*Config) error
-}
+import (
+	"github.com/DustinMeyer1010/pokedexcli/internal/models"
+	"github.com/charmbracelet/bubbles/list"
+)
 
 type Config struct {
 	Next      string
 	Previous  string
 	Arugments string
 }
+
+type Command struct {
+	Name     string
+	Desc     string
+	Callback func(config *Config) ([]list.Item, error)
+	View     models.ViewState
+}
+
+func (c Command) GetName() string {
+	return c.Name
+}
+
+func (c Command) Title() string       { return c.Name }
+func (c Command) Description() string { return c.Desc }
+func (c Command) FilterValue() string { return c.Name }
+
+/*
+type CliCommand struct {
+	Name        string
+	Description string
+	Callback    func(*Config) error
+}
+
 
 var Commands map[string]CliCommand = map[string]CliCommand{}
 
@@ -46,3 +68,4 @@ func InitCommands() {
 		Callback:    commandPokedex,
 	}
 }
+*/

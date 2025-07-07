@@ -1,16 +1,6 @@
 package commands
 
-import (
-	"encoding/json"
-	"fmt"
-	"io"
-	"math/rand"
-	"net/http"
-
-	"github.com/DustinMeyer1010/pokedexcli/internal/models"
-	"github.com/DustinMeyer1010/pokedexcli/internal/player"
-)
-
+/*
 //https://pokeapi.co/api/v2/pokemon/{id or name}/
 
 func commandCatch(config *Config) error {
@@ -48,3 +38,5 @@ func attemptCatch(baseExperience int) bool {
 	roll := rand.Float64()
 	return roll < chance
 }
+
+*/

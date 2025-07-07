@@ -17,18 +17,17 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		switch m.currentView {
 		case mainView:
 			switch msg.String() {
-			case "ctrl-c":
+			case "ctrl-c", "q":
 				return m, tea.Quit
 			case "enter":
-				item := m.commandMenu.SelectedItem().(command) // Get the current slice
-				locations, _ := item.callback(&config)
+				item := m.commandMenu.SelectedItem().(commands.Command) // Get the current slice
+				locations, _ := item.Callback(&config)
 				m.mapMenu.SetItems(locations)
-				m.currentView = item.view
-
+				m.currentView = item.View
 			}
 		case mapView:
 			switch msg.String() {
-			case "ctrl-c":
+			case "ctrl-c", "q":
 				return m, tea.Quit
 			case "n":
 				if config.Next != "" {

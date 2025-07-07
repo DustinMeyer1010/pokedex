@@ -1,5 +1,6 @@
 package commands
 
+/*
 import (
 	"encoding/json"
 	"fmt"
@@ -38,3 +39,4 @@ func commandExplore(config *Config) error {
 	return nil
 
 }
+*/

@@ -1,5 +1,6 @@
 package player
 
+/*
 import (
 	"fmt"
 
@@ -31,3 +32,4 @@ func RetrieveAllPokemon() (all []string) {
 
 	return
 }
+*/

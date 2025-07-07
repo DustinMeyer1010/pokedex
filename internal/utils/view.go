@@ -8,15 +8,16 @@ func (m model) View() string {
 	switch m.currentView {
 	case mainView:
 		body.WriteString(m.commandMenu.View())
-
+		body.WriteString("")
 	case mapView:
-		m.mapMenu.Title = "Locations Found"
+		m.mapMenu.Title = "Map Locations"
 		body.WriteString(m.mapMenu.View())
+		body.WriteString("\n[n] Next - [p] Previous [up/down] - Change Selection")
 	default:
 		body.WriteString("Loading")
 	}
 
-	body.WriteString("\n[n] Next Menu - [p] Previous Menu")
+	body.WriteString("\n[enter] Select - [q] Quit")
 
 	return body.String()
 }

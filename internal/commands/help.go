@@ -1,5 +1,6 @@
 package commands
 
+/*
 import "fmt"
 
 func commandHelp(config *Config) error {
@@ -15,3 +16,4 @@ Usage:
 	fmt.Println(helpMessage)
 	return nil
 }
+*/
